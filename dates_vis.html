@@ -13079,9 +13079,17 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="How-I-Tracked-Down-a-Peculiar-Problem-in-a-Dataset-Using-Visualizations:-Behind-the-Scenes">How I Tracked Down a Peculiar Problem in a Dataset Using Visualizations: Behind the Scenes<a class="anchor-link" href="#How-I-Tracked-Down-a-Peculiar-Problem-in-a-Dataset-Using-Visualizations:-Behind-the-Scenes">&#182;</a></h1><p>This is how I created some Visualizations with altair in python.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -13104,7 +13112,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">review_big</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;C:/Users/travis/Downloads/review_analysis.csv&#39;</span><span class="p">,</span> <span class="n">usecols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;review_date&#39;</span><span class="p">,</span> <span class="s1">&#39;fandom_id&#39;</span><span class="p">],</span> <span class="n">nrows</span> <span class="o">=</span> <span class="mi">50_000_000</span><span class="p">,</span> <span class="n">engine</span> <span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
@@ -13121,7 +13129,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[46]:</div>
+    <div class="prompt output_prompt">Out[70]:</div>
 
 
 
@@ -13172,7 +13180,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">review_big</span><span class="p">[</span><span class="s1">&#39;review_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">review_big</span><span class="p">[</span><span class="s1">&#39;review_date&#39;</span><span class="p">],</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span>
@@ -13197,7 +13205,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fandom_one</span> <span class="o">=</span> <span class="n">review_big</span><span class="p">[</span><span class="n">review_big</span><span class="p">[</span><span class="s1">&#39;fandom_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">27</span><span class="p">])]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> 
@@ -13214,7 +13222,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[48]:</div>
+    <div class="prompt output_prompt">Out[72]:</div>
 
 
 
@@ -13235,7 +13243,7 @@ Name: fandom_id, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fandom_one_dist</span> <span class="o">=</span> <span class="n">fandom_one</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;fandom_id&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
@@ -13252,7 +13260,7 @@ Name: fandom_id, dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[49]:</div>
+    <div class="prompt output_prompt">Out[73]:</div>
 
 
 
@@ -13397,7 +13405,7 @@ Name: fandom_id, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fandom_one_vis</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">fandom_one_dist</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
@@ -13423,18 +13431,18 @@ Name: fandom_id, dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[50]:</div>
+    <div class="prompt output_prompt">Out[74]:</div>
 
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-9af00681e3394e498878b2d7c236be2d"></div>
+<div id="altair-viz-39fb0a8ebd574e058ac81de936d8d6e8"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-9af00681e3394e498878b2d7c236be2d") {
-      outputDiv = document.getElementById("altair-viz-9af00681e3394e498878b2d7c236be2d");
+    if (outputDiv.id !== "altair-viz-39fb0a8ebd574e058ac81de936d8d6e8") {
+      outputDiv = document.getElementById("altair-viz-39fb0a8ebd574e058ac81de936d8d6e8");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -13496,7 +13504,7 @@ Name: fandom_id, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour_year_count</span> <span class="o">=</span> <span class="n">review_big</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;year&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -13516,7 +13524,7 @@ Name: fandom_id, dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[51]:</div>
+    <div class="prompt output_prompt">Out[75]:</div>
 
 
 
@@ -13599,7 +13607,7 @@ Name: fandom_id, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour_year_count</span><span class="p">[</span><span class="s1">&#39;percentage_annual&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hour_year_count</span><span class="p">[</span><span class="s1">&#39;review_date&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">hour_year_count</span><span class="p">[</span><span class="s1">&#39;year_sum&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
@@ -13624,7 +13632,7 @@ Name: fandom_id, dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[52]:</div>
+    <div class="prompt output_prompt">Out[76]:</div>
 
 
 
@@ -13701,7 +13709,7 @@ Name: fandom_id, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">color</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">hour_year_count</span><span class="p">)</span><span class="o">.</span><span class="n">mark_rect</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
@@ -13743,18 +13751,18 @@ Name: fandom_id, dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[53]:</div>
+    <div class="prompt output_prompt">Out[77]:</div>
 
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-bd14bf1ced4743c0ab8084751966e5f6"></div>
+<div id="altair-viz-b0a2f5c7872048e2a9e6f8ed9b305a36"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-bd14bf1ced4743c0ab8084751966e5f6") {
-      outputDiv = document.getElementById("altair-viz-bd14bf1ced4743c0ab8084751966e5f6");
+    if (outputDiv.id !== "altair-viz-b0a2f5c7872048e2a9e6f8ed9b305a36") {
+      outputDiv = document.getElementById("altair-viz-b0a2f5c7872048e2a9e6f8ed9b305a36");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -13816,7 +13824,7 @@ Name: fandom_id, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour_month_count</span> <span class="o">=</span> <span class="n">review_big</span><span class="p">[</span><span class="n">review_big</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2011</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -13841,7 +13849,7 @@ Name: fandom_id, dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[64]:</div>
+    <div class="prompt output_prompt">Out[78]:</div>
 
 
 
@@ -13898,7 +13906,7 @@ Name: fandom_id, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">color</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">hour_month_count</span><span class="p">)</span><span class="o">.</span><span class="n">mark_rect</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
@@ -13939,18 +13947,18 @@ Name: fandom_id, dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[65]:</div>
+    <div class="prompt output_prompt">Out[79]:</div>
 
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-383e3e589d134c9c8dc671827df19604"></div>
+<div id="altair-viz-4e7de66a49c941cf8394c7d6efa52602"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-383e3e589d134c9c8dc671827df19604") {
-      outputDiv = document.getElementById("altair-viz-383e3e589d134c9c8dc671827df19604");
+    if (outputDiv.id !== "altair-viz-4e7de66a49c941cf8394c7d6efa52602") {
+      outputDiv = document.getElementById("altair-viz-4e7de66a49c941cf8394c7d6efa52602");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -14002,9 +14010,17 @@ Name: fandom_id, dtype: int64</pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now that I have created the three visualisation to find the problem, I will build an interactive version that ties them all together and facilitates further exploration. First I will have to prepare each the data. For each graph I will have one dataframe that includes values for each possible selection the graph could have (the month will have months for all years). Then I will use filters to hide all the months that aren't selected.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour_month_count</span> <span class="o">=</span> <span class="n">review_big</span><span class="p">[</span><span class="n">review_big</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1999</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span> <span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -14028,7 +14044,7 @@ Name: fandom_id, dtype: int64</pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[56]:</div>
+    <div class="prompt output_prompt">Out[80]:</div>
 
 
 
@@ -14088,7 +14104,7 @@ Name: fandom_id, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour_day_count</span> <span class="o">=</span> <span class="n">review_big</span><span class="p">[</span><span class="n">review_big</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1999</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span> <span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -14140,7 +14156,7 @@ Name: day_count, Length: 48978, dtype: int64
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[57]:</div>
+    <div class="prompt output_prompt">Out[81]:</div>
 
 
 
@@ -14203,7 +14219,7 @@ Name: day_count, Length: 48978, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour_day_count</span> <span class="o">=</span> <span class="n">hour_day_count</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hour_count</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">])</span>
@@ -14220,7 +14236,7 @@ Name: day_count, Length: 48978, dtype: int64
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[58]:</div>
+    <div class="prompt output_prompt">Out[82]:</div>
 
 
 
@@ -14286,7 +14302,7 @@ Name: day_count, Length: 48978, dtype: int64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour_day_count</span>
@@ -14302,7 +14318,7 @@ Name: day_count, Length: 48978, dtype: int64
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[59]:</div>
+    <div class="prompt output_prompt">Out[83]:</div>
 
 
 
@@ -14457,9 +14473,18 @@ Name: day_count, Length: 48978, dtype: int64
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below I put all the multipart graph pieces together.</p>
+<p>The graph is displayed at <a href="https://travisneils.github.io/dates/date_chart.html">https://travisneils.github.io/dates/date_chart.html</a></p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">single_year</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection_single</span><span class="p">(</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">init</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;year&quot;</span><span class="p">:</span><span class="mi">2011</span><span class="p">})</span>
@@ -14563,7 +14588,7 @@ Name: day_count, Length: 48978, dtype: int64
     <span class="n">single_year</span> <span class="o">&amp;</span> <span class="n">single_month</span> <span class="o">&amp;</span> <span class="n">single_day</span>
 <span class="p">)</span>
 
-<span class="n">s_year</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">hour_month_count</span><span class="p">)</span><span class="o">.</span><span class="n">mark_text</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+<span class="n">selected_year</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">hour_month_count</span><span class="p">)</span><span class="o">.</span><span class="n">mark_text</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;min(year)&#39;</span><span class="p">)</span>
 <span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span>
     <span class="n">single_year</span>
@@ -14571,7 +14596,7 @@ Name: day_count, Length: 48978, dtype: int64
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Selected Year:&quot;</span>
 <span class="p">)</span>
 
-<span class="n">s_month</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">hour_day_count</span><span class="p">)</span><span class="o">.</span><span class="n">mark_text</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+<span class="n">selected_month</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">hour_day_count</span><span class="p">)</span><span class="o">.</span><span class="n">mark_text</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;min(month)&#39;</span><span class="p">)</span>
 <span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span>
     <span class="n">single_year</span> <span class="o">&amp;</span> <span class="n">single_month</span>
@@ -14579,10 +14604,19 @@ Name: day_count, Length: 48978, dtype: int64
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Selected Month:&quot;</span>
 <span class="p">)</span>
 
+<span class="n">selected_day</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">hour_day_count</span><span class="p">)</span><span class="o">.</span><span class="n">mark_text</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;min(day)&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span>
+    <span class="n">single_year</span> <span class="o">&amp;</span> <span class="n">single_month</span> <span class="o">&amp;</span> <span class="n">single_day</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Selected Day:&quot;</span>
+<span class="p">)</span>
+
 <span class="c1"># altair_saver.save(monthly_chart, &#39;monthly.svg&#39;)</span>
 
 <span class="c1"># altair_saver.save(annual_chart, &#39;annual.png&#39;)</span>
-<span class="n">interactive_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">vconcat</span><span class="p">(</span><span class="n">annual_chart</span><span class="p">,</span>  <span class="n">s_year</span><span class="p">,</span>  <span class="n">monthly_chart</span><span class="p">,</span>  <span class="n">s_month</span><span class="p">,</span> <span class="n">daily_chart</span><span class="p">,</span> <span class="n">daily_hist</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">interactive_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">vconcat</span><span class="p">(</span><span class="n">annual_chart</span><span class="p">,</span>  <span class="n">selected_year</span><span class="p">,</span>  <span class="n">monthly_chart</span><span class="p">,</span>  <span class="n">selected_month</span><span class="p">,</span> 
+<span class="n">daily_chart</span><span class="p">,</span> <span class="n">selected_day</span><span class="p">,</span> <span class="n">daily_hist</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">interactive_chart</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;date_chart.html&#39;</span><span class="p">)</span>
 <span class="c1"># interactive_chart</span>
 </pre></div>
